@@ -25,7 +25,8 @@ namespace Boleto.Net.MVC.Models
         Sicred = 748,
         Sudameris = 347,
         Unibanco = 409,
-        Semear = 743
+        Semear = 743,
+        Caruana = 130
     }
 
     /// <Author>
@@ -680,9 +681,9 @@ namespace Boleto.Net.MVC.Models
             boleto.CodigoBarra.CampoLivre = "0001023514837340110996818";
             boleto.CodigoBarra.ValorDocumento = "0000025151";
             boleto.CodigoBarra.FatorVencimento = 7363;
-            
+
             var linhaDigitavel = boleto.CodigoBarra.LinhaDigitavelFormatada;
-            boleto.CodigoBarra.Codigo = boleto.CodigoBarra.LinhaDigitavelFormatada.Trim().Replace(".",string.Empty).Replace(" ", string.Empty);
+            boleto.CodigoBarra.Codigo = boleto.CodigoBarra.LinhaDigitavelFormatada.Trim().Replace(".", string.Empty).Replace(" ", string.Empty);
 
             var boletoBancario = new BoletoBancario
             {
@@ -694,6 +695,75 @@ namespace Boleto.Net.MVC.Models
             };
 
             return boletoBancario;
+        }
+        public BoletoBancario Caruana()
+        {
+            var boleto = new BoletoNet.Boleto();
+
+            boleto.Cedente = new Cedente()
+            {
+                MostrarCNPJnoBoleto = true,
+                Nome = "Caruana S/A - SCFI",
+                CPFCNPJ = "09313766000109",
+                Codigo = "2119",
+                ContaBancaria = new ContaBancaria()
+                {
+                    Agencia = "0001",
+                    Conta = "2119", // TODO: VERIFICAR
+                },
+                Endereco = new Endereco()
+                {
+                    End = "RUA do Cedente",
+                    Bairro = "BAIRRO Cedente",
+                    CEP = "32310535",
+                    Cidade = "São Paulo",
+                    UF = "SP",
+                }
+            };
+
+            boleto.LocalPagamento = "PAGÁVEL EM QUALQUER BANCO ATÉ O VENCIMENTO.";
+            boleto.Instrucoes.Add(new Instrucao_Caruana()
+            {
+                Descricao = "Após vencimento, contactar a Caruana S/A - SCFI"
+            });
+
+            boleto.Carteira = "121";
+            boleto.ValorBoleto = boleto.ValorCobrado = 35640.83M;
+            boleto.DataVencimento = boleto.DataProcessamento = boleto.DataDocumento = new DateTime(2018, 4, 11);
+            boleto.NossoNumero = "132".PadLeft(10, '0');
+            boleto.DigitoNossoNumero = "4";
+
+            boleto.NumeroDocumento = "132";
+
+            boleto.EspecieDocumento = 
+                new EspecieDocumento_Caruana(new EspecieDocumento_Caruana().getCodigoEspecieByEnum(EnumEspecieDocumento_Caruana.DuplicataServico));
+
+            boleto.Sacado = new Sacado()
+            {
+                CPFCNPJ = "05461883893",
+                Nome = "Joãozinho Testador",
+                Endereco = new Endereco()
+                {
+                    End = "RUA do sacado",
+                    Bairro = "BAIRRO do sacado",
+                    CEP = "32310535",
+                    Cidade = "Contagem",
+                    UF = "MG",
+                }
+            };
+  
+            var boletoImpressao = new BoletoBancario
+            {
+                CodigoBanco = 130,
+                Boleto = boleto,
+                MostrarEnderecoCedente = true,
+                MostrarContraApresentacaoNaDataVencimento = false,
+                GerarArquivoRemessa = true,
+            };
+
+            boleto.Valida();
+
+            return boletoImpressao;
         }
     }
 }

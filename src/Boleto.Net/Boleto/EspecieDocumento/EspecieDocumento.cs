@@ -270,7 +270,8 @@ namespace BoletoNet
                 { 4, new EspecieDocumento_Nordeste     ()  },
                 { 707, new EspecieDocumento_Daycoval   ()  },
                 { 637, new EspecieDocumento_Sofisa     ()  },
-                { 743, new EspecieDocumento_Semear     ()  }
+                { 743, new EspecieDocumento_Semear     ()  },
+                { 130, new EspecieDocumento_Caruana    ()  }
         };
     }
 }

@@ -169,7 +169,10 @@ namespace BoletoNet
                     case 743:
                         _IBanco = new Banco_Semear();
                         break;
-					default:
+                    case 130:
+                        _IBanco = new Banco_Caruana();
+                        break;
+                    default:
 						throw new Exception("Código do banco não implementando: " + codigoBanco);
 				}
 			}
