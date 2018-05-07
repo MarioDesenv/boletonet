@@ -117,7 +117,7 @@ namespace BoletoNet
                 $"{boleto.Cedente.ContaBancaria.Conta}".PadLeft(7, '0'),
                 $"{boleto.NossoNumero}{boleto.DigitoNossoNumero}");
 
-            int _dacBarra = Mod11Base9(boleto.CodigoBarra.Codigo);
+            int _dacBarra = Mod11Peso2a9(boleto.CodigoBarra.Codigo);
 
             boleto.CodigoBarra.Codigo = Strings.Left(boleto.CodigoBarra.Codigo, 4) + _dacBarra + Strings.Right(boleto.CodigoBarra.Codigo, 39);
         }
