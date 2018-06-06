@@ -705,11 +705,11 @@ namespace Boleto.Net.MVC.Models
                 MostrarCNPJnoBoleto = true,
                 Nome = "Caruana S/A - SCFI",
                 CPFCNPJ = "09313766000109",
-                Codigo = "2119",
+                Codigo = "2127",
                 ContaBancaria = new ContaBancaria()
                 {
                     Agencia = "0001",
-                    Conta = "2119", // TODO: VERIFICAR
+                    Conta = "2127", // TODO: VERIFICAR
                 },
                 Endereco = new Endereco()
                 {
@@ -728,12 +728,12 @@ namespace Boleto.Net.MVC.Models
             });
 
             boleto.Carteira = "121";
-            boleto.ValorBoleto = boleto.ValorCobrado = 35640.83M;
-            boleto.DataVencimento = boleto.DataProcessamento = boleto.DataDocumento = new DateTime(2018, 4, 11);
-            boleto.NossoNumero = "132".PadLeft(10, '0');
-            boleto.DigitoNossoNumero = "4";
+            boleto.ValorBoleto = boleto.ValorCobrado = 1.12M;
+            boleto.DataVencimento = boleto.DataProcessamento = boleto.DataDocumento = new DateTime(2018, 5, 10);
+            boleto.NossoNumero = "460022".PadLeft(10, '0');
+            boleto.DigitoNossoNumero = "0";
 
-            boleto.NumeroDocumento = "132";
+            boleto.NumeroDocumento = "460022";
 
             boleto.EspecieDocumento = 
                 new EspecieDocumento_Caruana(new EspecieDocumento_Caruana().getCodigoEspecieByEnum(EnumEspecieDocumento_Caruana.DuplicataServico));
